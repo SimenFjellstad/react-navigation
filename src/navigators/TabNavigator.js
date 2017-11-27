@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { Platform } from 'react-native';
+import {Platform} from 'react-native';
 
 import createNavigator from './createNavigator';
 import createNavigationContainer from '../createNavigationContainer';
@@ -12,7 +12,7 @@ import TabBarBottom from '../views/TabView/TabBarBottom';
 
 import NavigatorTypes from './NavigatorTypes';
 
-import type { TabViewConfig } from '../views/TabView/TabView';
+import type {TabViewConfig} from '../views/TabView/TabView';
 
 import type {
   NavigationState,
@@ -41,7 +41,7 @@ const TabNavigator = (
   config: TabNavigatorConfig = {}
 ) => {
   // Use the look native to the platform by default
-  const mergedConfig = { ...TabNavigator.Presets.Default, ...config };
+  const mergedConfig = {...TabNavigator.Presets.Default, ...config};
   const {
     tabBarComponent,
     tabBarPosition,
@@ -68,6 +68,7 @@ const TabNavigator = (
       tabBarPosition={tabBarPosition}
       tabBarOptions={tabBarOptions}
       swipeEnabled={swipeEnabled}
+      onPositionChange={config.onPositionChange}
       animationEnabled={animationEnabled}
       configureTransition={configureTransition}
       lazy={lazy}

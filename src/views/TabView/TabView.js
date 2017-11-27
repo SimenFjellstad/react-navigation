@@ -1,9 +1,9 @@
 /* @flow */
 
 import * as React from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
-import { TabViewAnimated, TabViewPagerPan } from 'react-native-tab-view';
-import type { Layout } from 'react-native-tab-view/src/TabViewTypeDefinitions';
+import {View, StyleSheet, Platform} from 'react-native';
+import {TabViewAnimated, TabViewPagerPan} from 'react-native-tab-view';
+import type {Layout} from 'react-native-tab-view/src/TabViewTypeDefinitions';
 import SceneView from '../SceneView';
 import withCachedChildNavigation from '../../withCachedChildNavigation';
 import SafeAreaView from '../SafeAreaView';
@@ -62,17 +62,17 @@ class TabView extends React.PureComponent<Props> {
   static defaultProps = {
     // fix for https://github.com/react-native-community/react-native-tab-view/issues/312
     initialLayout: Platform.select({
-      android: { width: 1, height: 0 },
+      android: {width: 1, height: 0},
     }),
   };
 
   _handlePageChanged = (index: number) => {
-    const { navigation } = this.props;
+    const {navigation} = this.props;
     navigation.navigate(navigation.state.routes[index].routeName);
   };
 
-  _renderScene = ({ route }: any) => {
-    const { screenProps } = this.props;
+  _renderScene = ({route}: any) => {
+    const {screenProps} = this.props;
     const childNavigation = this.props.childNavigationProps[route.key];
     const TabComponent = this.props.router.getComponentForRouteName(
       route.routeName
@@ -88,7 +88,7 @@ class TabView extends React.PureComponent<Props> {
     );
   };
 
-  _getLabel = ({ route, tintColor, focused }: TabScene) => {
+  _getLabel = ({route, tintColor, focused}: TabScene) => {
     const options = this.props.router.getScreenOptions(
       this.props.childNavigationProps[route.key],
       this.props.screenProps || {}
@@ -96,7 +96,7 @@ class TabView extends React.PureComponent<Props> {
 
     if (options.tabBarLabel) {
       return typeof options.tabBarLabel === 'function'
-        ? options.tabBarLabel({ tintColor, focused })
+        ? options.tabBarLabel({tintColor, focused})
         : options.tabBarLabel;
     }
 
@@ -107,7 +107,7 @@ class TabView extends React.PureComponent<Props> {
     return route.routeName;
   };
 
-  _getOnPress = (previousScene: TabScene, { route }: TabScene) => {
+  _getOnPress = (previousScene: TabScene, {route}: TabScene) => {
     const options = this.props.router.getScreenOptions(
       this.props.childNavigationProps[route.key],
       this.props.screenProps || {}
@@ -116,7 +116,7 @@ class TabView extends React.PureComponent<Props> {
     return options.tabBarOnPress;
   };
 
-  _getTestIDProps = ({ route }: TabScene) => {
+  _getTestIDProps = ({route}: TabScene) => {
     const options = this.props.router.getScreenOptions(
       this.props.childNavigationProps[route.key],
       this.props.screenProps || {}
@@ -125,14 +125,14 @@ class TabView extends React.PureComponent<Props> {
     return options.tabBarTestIDProps;
   };
 
-  _renderIcon = ({ focused, route, tintColor }: TabScene) => {
+  _renderIcon = ({focused, route, tintColor}: TabScene) => {
     const options = this.props.router.getScreenOptions(
       this.props.childNavigationProps[route.key],
       this.props.screenProps || {}
     );
     if (options.tabBarIcon) {
       return typeof options.tabBarIcon === 'function'
-        ? options.tabBarIcon({ tintColor, focused })
+        ? options.tabBarIcon({tintColor, focused})
         : options.tabBarIcon;
     }
     return null;
@@ -181,7 +181,7 @@ class TabView extends React.PureComponent<Props> {
     let renderFooter;
     let renderPager;
 
-    const { state } = this.props.navigation;
+    const {state} = this.props.navigation;
     const options = router.getScreenOptions(
       this.props.childNavigationProps[state.routes[state.index].key],
       screenProps || {}
@@ -216,6 +216,7 @@ class TabView extends React.PureComponent<Props> {
       renderFooter,
       renderScene: this._renderScene,
       onIndexChange: this._handlePageChanged,
+      onPositionChange: this.props.onPositionChange,
       navigationState: this.props.navigation.state,
       screenProps: this.props.screenProps,
       style: styles.container,
