@@ -17,7 +17,8 @@ class TabView extends React.PureComponent {
   };
 
   _handlePageChanged = index => {
-    const { navigation } = this.props;
+    const { navigation, onPositionChange } = this.props;
+    onPositionChange({value:index});
     navigation.navigate(navigation.state.routes[index].routeName);
   };
 
